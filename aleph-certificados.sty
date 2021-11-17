@@ -1,0 +1,198 @@
+% ----------------------- Identification -------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{aleph-certificados}[2011/02/18]
+
+% Paquete creado para generar certificados de cursos
+% por: Andrés Merino
+%
+% Son obligatorios los comandos
+%
+% \numfirmas{}  máximo 4
+%       dependiendo de este comando se ingresan las firmas
+%       \firmaA[cargo]{nombre}
+%       \firmaB[cargo]{nombre}
+%       \firmaC[cargo]{nombre}
+%       \firmaD[cargo]{nombre}
+% \nombrecurso{}
+% \institucion[slogan o auspicio]{}
+% \lugar{}
+% \fechainicio{}
+% \fechafinal{}
+% \fechaentrega{}
+% \duracion{}
+%
+% Son opcionales los comandos
+%
+% \logoder[tamaño, en relación al ancho de linea]{nombre del logo que va a ir a la derecha}
+% \logoizq[tamaño, en relación al ancho de linea]{nombre del logo que va a ir a la izquierda}
+
+%------------------------Paquetes---------------------------
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[spanish]{babel}
+
+\RequirePackage{ifthen}
+\RequirePackage{calc}
+
+\RequirePackage{multicol}
+\RequirePackage{kpfonts}
+\RequirePackage{pst-coil}
+
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+
+
+
+%------------------------Longitudes-------------------------
+
+\newlength{\dimlogoizq}     \setlength{\dimlogoizq}{0pt}
+\newlength{\dimlogoder}     \setlength{\dimlogoder}{0pt}
+\newlength{\diminstitucion} \setlength{\diminstitucion}{0.9\textwidth}
+
+\newlength{\longsenh}       \setlength{\longsenh}{\textwidth + 0.023\textwidth}
+\newlength{\longsenv}       \setlength{\longsenv}{\textheight + 0.2\textheight}
+
+\newlength{\periodoh}       \setlength{\periodoh}{\longsenh / 8}
+\newlength{\periodov}       \setlength{\periodov}{\longsenv / 6}
+
+%-------------------------Colores---------------------------
+
+\definecolor{colorbordeA}{rgb}{1,0,0}
+\definecolor{colorbordeB}{rgb}{0,0,1}
+\definecolor{colortextoA}{rgb}{1,0,0}
+\definecolor{colortextoB}{rgb}{0,0,1}
+
+%-------------------------Comandos--------------------------
+
+\newcommand{\numfirmas}[1]{\newcommand{\@numfirmas}{#1}}
+
+\newcommand{\@colorbordeA}{red} \newcommand{\@colorbordeB}{blue}
+\newcommand{\@colortextoA}{red} \newcommand{\@colortextoB}{blue}
+\newcommand{\@firmaA}{ }        \newcommand{\@cargofirmaA}{ }
+\newcommand{\@firmaB}{ }        \newcommand{\@cargofirmaB}{ }
+\newcommand{\@firmaC}{ }        \newcommand{\@cargofirmaC}{ }
+\newcommand{\@firmaD}{ }        \newcommand{\@cargofirmaD}{ }
+\newcommand{\@logoizq}{vacio}   \newcommand{\@logoder}{vacio}
+
+\newcommand{\colorbordeA}[2][named]{\definecolor{colorbordeA}{#1}{#2}}
+\newcommand{\colorbordeB}[2][named]{\definecolor{colorbordeB}{#1}{#2}}
+\newcommand{\colortextoA}[2][named]{\definecolor{colortextoA}{#1}{#2}}
+\newcommand{\colortextoB}[2][named]{\definecolor{colortextoB}{#1}{#2}}
+
+\newcommand{\firmaA}[2][Organizador]{\renewcommand{\@firmaA}{#2}\renewcommand{\@cargofirmaA}{#1}}
+\newcommand{\firmaB}[2][Instructor] {\renewcommand{\@firmaB}{#2}\renewcommand{\@cargofirmaB}{#1}}
+\newcommand{\firmaC}[2][]           {\renewcommand{\@firmaC}{#2}\renewcommand{\@cargofirmaC}{#1}}
+\newcommand{\firmaD}[2][]           {\renewcommand{\@firmaD}{#2}\renewcommand{\@cargofirmaD}{#1}}
+\newcommand{\institucion}[2][]      {\newcommand{\@institucion}{#2}\newcommand{\@auspicio}{#1}}
+\newcommand{\nombrecurso}[1]        {\newcommand{\@nombrecurso}{#1}}
+\newcommand{\lugar}[1]              {\newcommand{\@lugar}{#1}}
+\newcommand{\fechainicio}[1]        {\newcommand{\@fechainicio}{#1}}
+\newcommand{\fechafinal}[1]         {\newcommand{\@fechafinal}{#1}}
+\newcommand{\fechaentrega}[1]       {\newcommand{\@fechaentrega}{#1}}
+\newcommand{\duracion}[1]           {\newcommand{\@duracion}{#1}}
+
+\newcommand{\logoizq}[2][0.1]{\renewcommand{\@logoizq}{#2}
+    \setlength{\dimlogoizq}{#1\textwidth}
+    \setlength{\diminstitucion}{.85\textwidth - \dimlogoizq -\dimlogoder}}
+
+\newcommand{\logoder}[2][0.1]{\renewcommand{\@logoder}{#2}
+    \setlength{\dimlogoder}{#1\textwidth}
+    \setlength{\diminstitucion}{.85\textwidth - \dimlogoizq -\dimlogoder}}
+
+\newcommand{\margen}{\vspace*{-1cm}\hspace*{-0.04\textwidth}
+   \begin{pspicture}(0,0)(0,0)
+   \pssin[amplitude=0.2,periods=\periodoh,coilarm=0,linecolor=colorbordeA](0,0)(\longsenh,0)
+   \pssin[amplitude=0.2,function=neg sin,periods=\periodoh,coilarm=0,linecolor=colorbordeB](0,0)(\longsenh,0)
+   \pssin[amplitude=0.2,function= sin 0.3 add, periods=\periodoh,coilarm=0,linecolor=colorbordeA](0,0)(\longsenh,0)
+   \pssin[amplitude=0.2,function=neg sin 0.3 add, periods=\periodoh,coilarm=0,linecolor=colorbordeB](0,0)(\longsenh,0)
+
+   \pssin[amplitude=0.2,function= sin 0.3 add, periods=\periodov,coilarm=0,linecolor=colorbordeB](0,0)(0,-\textheight)
+   \pssin[amplitude=0.2,function=neg sin 0.3 add, periods=\periodov,coilarm=0,linecolor=colorbordeA](0,0)(0,-\textheight)
+   \pssin[amplitude=0.2, periods=\periodov,coilarm=0,linecolor=colorbordeB](0,0)(0,-\textheight)
+   \pssin[amplitude=0.2,function=neg sin, periods=\periodov,coilarm=0,linecolor=colorbordeA](0,0)(0,-\textheight)
+
+   \pssin[amplitude=0.2,function= sin 0.3 add, periods=\periodov,coilarm=0,linecolor=colorbordeB](\longsenh,0)(\longsenh,-\textheight)
+   \pssin[amplitude=0.2,function=neg sin 0.3 add, periods=\periodov,coilarm=0,linecolor=colorbordeA](\longsenh,0)(\longsenh,-\textheight)
+   \pssin[amplitude=0.2,function= sin, periods=\periodov,coilarm=0,linecolor=colorbordeB](\longsenh,0)(\longsenh,-\textheight)
+   \pssin[amplitude=0.2,function=neg sin, periods=\periodov,coilarm=0,linecolor=colorbordeA](\longsenh,0)(\longsenh,-\textheight)
+
+   \pssin[amplitude=0.2,function= sin 0.3 add, periods=\periodoh,coilarm=0,linecolor=colorbordeA](0,-\textheight)(\longsenh,-\textheight)
+   \pssin[amplitude=0.2,function=neg sin 0.3 add, periods=\periodoh,coilarm=0,linecolor=colorbordeB](0,-\textheight)(\longsenh,-\textheight)
+   \pssin[amplitude=0.2,function= sin, periods=\periodoh,coilarm=0,linecolor=colorbordeA](0,-\textheight)(\longsenh,-\textheight)
+   \pssin[amplitude=0.2,function=neg sin, periods=\periodoh,coilarm=0,linecolor=colorbordeB](0,-\textheight)(\longsenh,-\textheight)
+    \end{pspicture}
+}
+
+\newcommand{\cabecera}{
+    \begin{center}
+        \begin{huge}
+        \ifthenelse{\equal{\@logoizq}{vacio} \and \equal{\@logoder}{vacio}}
+            {\parbox{\diminstitucion}{\begin{center}{\sc \@institucion}\\
+                                      {\LARGE\@auspicio}\end{center}}}
+            {\ifthenelse{\equal{\@logoder}{vacio}}{
+            \parbox{\dimlogoizq}{\includegraphics[width=\dimlogoizq]{\@logoizq}}\hspace{1cm}
+            \parbox{\diminstitucion}{\textsc{\@institucion}\\
+                                     {\LARGE\@auspicio}}}
+             {\ifthenelse{\equal{\@logoizq}{vacio}}{
+             \parbox{\diminstitucion}{\begin{flushright}\textsc{\@institucion}\\
+                                      {\LARGE\@auspicio}\end{flushright}}\hspace{1cm}
+             \parbox{\dimlogoder}{\includegraphics[width=\dimlogoder]{\@logoder}}}
+             {\parbox{\dimlogoizq}{\includegraphics[width=\dimlogoizq]{\@logoizq}}\hspace{.5cm}
+              \parbox{\diminstitucion + .05\textwidth}{\begin{center}\textsc{\@institucion}\\
+                                                       {\LARGE\@auspicio}\end{center}}\hspace{.5cm}
+              \parbox{\dimlogoder}{\includegraphics[width=\dimlogoder]{\@logoder}}}
+            }}\\[3mm]
+            Otorga el presente\\[1cm]
+            \it \textcolor{colortextoA}{Certificado}
+        \end{huge}
+    \end{center}
+    \par
+}
+
+
+
+\newcommand{\firmas}{
+    \vspace{\fill}
+    \large
+    \begin{multicols}{\@numfirmas}\begin{center}
+            \@firmaA\par{\normalsize \@cargofirmaA}\par
+            \vfill\columnbreak
+            \@firmaB\par{\normalsize \@cargofirmaB}\par
+            \vfill\columnbreak
+            \@firmaC\par{\normalsize \@cargofirmaC}\par
+            \vfill\columnbreak
+            \@firmaD\par{\normalsize \@cargofirmaD}\par
+            \vfill
+    \end{center}\end{multicols}
+    \vspace{5mm}
+}
+
+
+\newcommand{\aprueba}[1]{\margen\begin{center}
+    \cabecera\par\vspace{8mm}
+    \begin{center}\parbox{.9\textwidth}{\large a {\LARGE\sc \textcolor{colortextoB}{#1}} por haber {\bf APROBADO} el curso de {\Large\@nombrecurso}\ dictado en \@lugar\ del \@fechainicio\ al \@fechafinal, con una duración de \@duracion.
+
+    \vspace{5mm}
+    \begin{flushright}\large Quito, \@fechaentrega.\end{flushright}}\end{center}
+    \firmas
+    \end{center}
+
+    \newpage
+}
+
+\newcommand{\asiste}[1]{\margen\begin{center}
+    \cabecera\par\vspace{8mm}
+    \begin{center}\parbox{.9\textwidth}{\large a {\LARGE\sc \textcolor{colortextoB}{#1}} por haber {\bf ASISTIDO} al curso de {\Large\@nombrecurso}\ dictado en \@lugar\ del \@fechainicio\ al \@fechafinal, con una duración de \@duracion.
+
+    \vspace{5mm}
+    \begin{flushright}\large Quito, \@fechaentrega.\end{flushright}}\end{center}
+    \firmas
+    \end{center}
+
+    \newpage
+}
+
+
+\pagestyle{empty}
+
