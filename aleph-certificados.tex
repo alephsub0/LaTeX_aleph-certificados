@@ -1,0 +1,92 @@
+\documentclass[11pt,a4paper]{ltxdoc} 
+\usepackage[spanish,es-noindentfirst,es-tabla]{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[margin=2.5cm,left=3.5cm]{geometry}
+\usepackage{mathpazo}
+\usepackage{changelog}
+
+\setlength{\parskip}{0.2\baselineskip}
+\renewcommand{\baselinestretch}{1.1}
+
+\newcommand{\file}[1]{\texttt{#1}}
+\newcommand{\option}[1]{\texttt{#1}}
+\newcommand{\package}[1]{\texttt{#1}}
+
+\title{\file{aleph-certificados.sty}}
+\author{Proyecto Alephsub0\\ Andr\'es Merino}
+\date{2023-11-27\\ Versión 0.1}
+
+\usepackage[colorlinks,linkcolor=teal,urlcolor=teal,
+   citecolor=black,bookmarks=true]{hyperref}
+\usepackage{url}
+
+\begin{document}
+ 
+\maketitle
+
+\begin{abstract}
+    \file{aleph-certificados.sty} es un paquete creado para dar formato y automatizar la generación de certificados. Esta clase fue generada dentro del proyecto Alephsub0 (\url{https://www.alephsub0.org/}).
+\end{abstract}
+
+\tableofcontents
+
+\section{Introducción}
+
+El paquete \file{aleph-certificados.sty} es parte del conjunto de clases y paquetes creados por Andrés Merino dentro de su proyecto personal Alephsub0.
+
+\section{Uso}
+
+Para cargar el paquete se utiliza: \cs{usepackage}|{aleph-certificados}|.
+
+Para visualizar un ejemplo puedes acceder al repositorio de GitHub de esta clase (clic \href{https://github.com/mate-andres/LaTeX_aleph-notas}{aquí}) % o buscarlo en la galería de plantilla de Overleaf (clic \href{https://www.overleaf.com/latex/templates/plantilla-para-escribir-resumenes-de-clase/mftfvjfhdcyj}{aquí}).
+
+\subsection{Comandos}
+
+\DescribeMacro{\numfirmas} Este comando permite establecer el número de firmas que se van a utilizar en el certificado. 
+
+\DescribeMacro{\firmaA}
+\DescribeMacro{\firmaB}
+\DescribeMacro{\firmaC}
+\DescribeMacro{\firmaD}
+
+
+Este comando permite establecer la firma de la persona que va a firmar el certificado. El primer argumento es opcional y permite establecer el cargo de la persona que va a firmar el certificado. El segundo argumento es obligatorio y permite establecer el nombre de la persona que va a firmar el certificado.
+
+\DescribeMacro{\nombrecurso} Este comando define el nombre del curso
+
+\DescribeMacro{\institucion} Este comando define el nombre de la institución que organiza el curso.
+
+\DescribeMacro{\lugar} Este comando define el lugar donde se realiza el curso.
+
+\DescribeMacro{\fechainicio} Este comando define la fecha de inicio del curso.
+
+\DescribeMacro{\fechafinal} Este comando define la fecha de finalización del curso.
+
+\DescribeMacro{\fechaentrega} Este comando define la fecha de entrega del certificado.
+
+\DescribeMacro{\duracion} Este comando define la duración del curso.
+
+\DescribeMacro{\logoizq} Este comando permite establecer el logo de la institución que organiza el curso. El argumento opcional permite establecer el ancho del logo.
+
+\DescribeMacro{\logoder} Este comando permite establecer el logo de la institución que organiza el curso. El argumento opcional permite establecer el ancho del logo.
+
+Cualquier problema adicional, por favor reportarlo a\\ 
+\url{mat.andresmerino@gmail.com}.
+
+\begin{changelog}[author=Andés Merino,
+    sectioncmd=\section]
+    % version 0.1
+    \shortversion{author=Daniel Lara,v=0.1,
+    date=2023-12-25,
+    changes=Primera versión en pruebas}
+\end{changelog}
+
+\newpage
+\DocInput{aleph-certificados.dtx}
+
+\end{document}

@@ -1,33 +1,44 @@
-%%
-%% This is file `aleph-certificados.sty',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% aleph-certificados.dtx  (with options: `aleph-certificados')
-%% 
-%% This is a generated file.
-%% LaTeX class for typesetting notes
-%% 
-%% Copyright (C) 2023 by Andres Merino <mat.andresmerino@gmail.com>
-%% 
-%% Para un mejor uso y entendimiento de la actual clase,
-%% consultar la documentación.
-%% 
+% \iffalse 
+%
+% Copyright (C) 2023 by Andres Merino <mat.andresmerino@gmail.com>
+% 
+% Para un mejor uso y entendimiento de la actual clase, consultar la documentación.
+% -----------------------------------------------------------
+%
+% \fi
+%
+%  \section{Implementación}
+%  \subsection{Identificación}
+%  Dado que esta clase utiliza el comando \cmd{\RequirePackage}, no funciona con 
+%  versiones antiguas de \LaTeXe.
+%    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[2009/09/24]
+%    \end{macrocode}
+%  El paquete se identifica con su fecha de lanzamiento y su número de versión.
+%  \begin{macrocode}
 \ProvidesPackage{aleph-certificados}[2023/11/27 v0.1]
+%    \end{macrocode}
+%  \subsection{Inicialización}
+% \iffalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% --- Inicialización
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Primero definimos una serie de comandos auxiliares para las opciones
+% \fi
 
+% \iffalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% --- Opciones
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \fi
 
+%  \subsection{Paquetes}
+% \iffalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% --- Paquetes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \fi
+%    \begin{macrocode}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[spanish]{babel}
@@ -40,10 +51,14 @@
 \RequirePackage{xcolor}
 \RequirePackage[a4paper,landscape,left=2cm,right=2cm,top=1.5cm,bottom=1.5cm]{geometry}
 
+%    \end{macrocode}
+% \iffalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% --- Variables internas
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newlength{\dimlogoizq}
+% \fi
+%    \begin{macrocode}
+\newlength{\dimlogoizq}     
 \setlength{\dimlogoizq}{0pt}
 \newlength{\dimlogoder}
 \setlength{\dimlogoder}{0pt}
@@ -57,30 +72,42 @@
 \setlength{\periodoh}{\longsenh / 8}
 \newlength{\periodov}
 \setlength{\periodov}{\longsenv / 6}
+%    \end{macrocode}
+%  \subsection{Colores predeterminados}
+%
+% \iffalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% --- Colores predeterminados
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \fi
+%    \begin{macrocode}
 \definecolor{colorbordeA}{rgb}{1,0,0}
 \definecolor{colorbordeB}{rgb}{0,0,1}
 \definecolor{colortextoA}{rgb}{1,0,0}
 \definecolor{colortextoB}{rgb}{0,0,1}
+%    \end{macrocode}
+%  \subsection{Comandos}
+%    
+% \iffalse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% --- Definición de comandos de datos
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \fi
+%    \begin{macrocode}
 \newcommand{\numfirmas}[1]{\newcommand{\@numfirmas}{#1}}
-\newcommand{\@colorbordeA}{red}
+\newcommand{\@colorbordeA}{red} 
 \newcommand{\@colorbordeB}{blue}
-\newcommand{\@colortextoA}{red}
+\newcommand{\@colortextoA}{red} 
 \newcommand{\@colortextoB}{blue}
-\newcommand{\@firmaA}{ }
+\newcommand{\@firmaA}{ }        
 \newcommand{\@cargofirmaA}{ }
-\newcommand{\@firmaB}{ }
+\newcommand{\@firmaB}{ }        
 \newcommand{\@cargofirmaB}{ }
-\newcommand{\@firmaC}{ }
+\newcommand{\@firmaC}{ }        
 \newcommand{\@cargofirmaC}{ }
-\newcommand{\@firmaD}{ }
+\newcommand{\@firmaD}{ }        
 \newcommand{\@cargofirmaD}{ }
-\newcommand{\@logoizq}{vacio}
+\newcommand{\@logoizq}{vacio}   
 \newcommand{\@logoder}{vacio}
 \newcommand{\colorbordeA}[2][named]{\definecolor{colorbordeA}{#1}{#2}}
 \newcommand{\colorbordeB}[2][named]{\definecolor{colorbordeB}{#1}{#2}}
@@ -103,7 +130,9 @@
 \newcommand{\logoder}[2][0.1]{\renewcommand{\@logoder}{#2}
     \setlength{\dimlogoder}{#1\textwidth}
     \setlength{\diminstitucion}{.85\textwidth - \dimlogoizq -\dimlogoder}}
+%    \end{macrocode}
 %%  Comando para crear el márgen de la página
+%    \begin{macrocode}
 \newcommand{\margen}{\vspace*{-1cm}\hspace*{-0.04\textwidth}
    \begin{pspicture}(0,0)(0,0)
    \pssin[amplitude=0.2,periods=\periodoh,coilarm=0,linecolor=colorbordeA](0,0)(\longsenh,0)
@@ -127,7 +156,9 @@
    \pssin[amplitude=0.2,function=neg sin, periods=\periodoh,coilarm=0,linecolor=colorbordeB](0,-\textheight)(\longsenh,-\textheight)
     \end{pspicture}
 }
+%    \end{macrocode}
 %%  Comando para crear la cabecera de la página
+%    \begin{macrocode}
 \newcommand{\cabecera}{
     \begin{center}
         \begin{huge}
@@ -153,7 +184,9 @@
     \end{center}
     \par
 }
+%    \end{macrocode}
 %%  Comando para crear las firmas
+%    \begin{macrocode}
 \newcommand{\firmas}{
     \vspace{\fill}
     \large
@@ -169,7 +202,9 @@
     \end{center}\end{multicols}
     \vspace{5mm}
 }
+%    \end{macrocode}
 %%  Comando para la aprobación del curso
+%    \begin{macrocode}
 \newcommand{\aprueba}[1]{\margen\begin{center}
     \cabecera\par\vspace{8mm}
     \begin{center}\parbox{.9\textwidth}{\large a {\LARGE\sc \textcolor{colortextoB}{#1}} por haber {\bf APROBADO} el curso de {\Large\@nombrecurso}\ dictado en \@lugar\ del \@fechainicio\ al \@fechafinal, con una duración de \@duracion.
@@ -181,7 +216,9 @@
 
     \newpage
 }
+%    \end{macrocode}
 %%  Comando para la asistencia del curso
+%    \begin{macrocode}
 \newcommand{\asiste}[1]{\margen\begin{center}
     \cabecera\par\vspace{8mm}
     \begin{center}\parbox{.9\textwidth}{\large a {\LARGE\sc \textcolor{colortextoB}{#1}} por haber {\bf ASISTIDO} al curso de {\Large\@nombrecurso}\ dictado en \@lugar\ del \@fechainicio\ al \@fechafinal, con una duración de \@duracion.
@@ -193,7 +230,8 @@
 
     \newpage
 }
+%    \end{macrocode}
 %%  Y ¡se acabó!
+%    \Finale
 \endinput
-%%
-%% End of file `aleph-certificados.sty'.
+
